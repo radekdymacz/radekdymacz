@@ -33,10 +33,13 @@ const sketch = ({ context, width, height }) => {
       for(let j = i + 1; j < agents.length;j++){
         const other = agents[j];
         const dist = agent.getDistance(other);
-    
-        if (dist  >  200 ) continue  
+        // agent.vel.x -= 0.001
+        // agent.vel.y -= 0.001
+        if (dist  >  180 ) continue  
 
-        context.lineWidth = math.mapRange(dist,0,200,1,0.001);
+        // agent.vel.x += 0.01
+        // agent.vel.y += 0.01
+        context.lineWidth = math.mapRange(dist,0,200,3,0.001);
 
         context.beginPath();
         context.moveTo(agent.pos.x,agent.pos.y);
@@ -44,19 +47,19 @@ const sketch = ({ context, width, height }) => {
         context.stroke();
       }
 
-      for(let i = 0; i < agents.length; i++) { 
-        context.lineWidth = 0.005 
-        context.beginPath();
-        context.moveTo(agent.pos.x - agent.width/2,agent.pos.y);
-        context.lineTo(0, agent.pos.y);
-        context.stroke();
-      }
+      // for(let i = 0; i < agents.length; i++) { 
+      //   context.lineWidth = 0.005 
+      //   context.beginPath();
+      //   context.moveTo(agent.pos.x - agent.width/2,agent.pos.y);
+      //   context.lineTo(0, agent.pos.y);
+      //   context.stroke();
+      // }
 
       for(let i = 0; i < agents.length; i++) { 
         context.lineWidth = 0.005
         context.beginPath();
-        context.moveTo(agent.pos.x,agent.pos.y + agent.width/2);
-        context.lineTo(agent.pos.x,height);
+        context.moveTo(agent.pos.x,agent.pos.y - agent.width/2);
+        context.lineTo(agent.pos.x,0);
         context.stroke();
       }
     }
