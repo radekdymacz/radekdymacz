@@ -3,7 +3,7 @@ const random = require('canvas-sketch-util/random');
 const math = require('canvas-sketch-util/math');
 
 const settings = {
-  dimensions: [1048,1048],
+  dimensions: [1080,1080],
   orientation: "portrait",
   // Print-ready size
   // pixelsPerInch: 300,
