@@ -4,7 +4,7 @@ const math = require('canvas-sketch-util/math');
 const { WebMidi } = require('webmidi')
 
 const settings = {
-  // dimensions: [1080, 1080],
+  dimensions: [1080, 1080],
   orientation: "portrait",
   // Print-ready size
   // pixelsPerInch: 300,
