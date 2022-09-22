@@ -24,26 +24,33 @@ const sketch = ({ context, width, height }) => {
   let currentNote = null;
 
   window.addEventListener('playNote', (e) => {
+
+    // let notes = []
+    // notes = e.detail.findOther(agents, notes);
+
+
+    // console.log(notes);
+
     channel.sendControlChange(21, Math.floor(math.mapRange(e.detail.pos.y, 0, width, 0, 127, true)));
     channel.sendControlChange(22, Math.floor(math.mapRange(e.detail.pos.x, 0, width, 0, 127, true)));
     channel.sendControlChange(7, Math.floor(math.mapRange(e.detail.pos.x, 0, width, 0, 127, true)));
     channel.octaveOffset = Math.floor(random.range(0, 1));
-    channel.playNote(e.detail.note, { 
+    channel.playNote(e.detail.note, {
       duration: random.range(1, 3000),
-      rawAttack: Math.floor(random.range(30,127))
+      rawAttack: Math.floor(random.range(30, 127))
     });
-    console.log(Math.floor(math.mapRange(e.detail.pos.y, 0, width, 0, 127, true)));
+    // e.detail.others = [];
   });
 
   WebMidi.enable().then(function () {
 
     midiOutputs = WebMidi.outputs;
-    console.log(midiOutputs);
+
     midiOutput = WebMidi.getOutputByName('IAC Driver Bus 1');
     channel = midiOutput.channels[1];
     // channel.playNote("C3", { duration: 1000 });
     // midiOutput.sendAllSoundOff();
-    console.log(midiOutput)
+
 
   }).catch(err => alert(err));
 
@@ -63,18 +70,25 @@ const sketch = ({ context, width, height }) => {
     for (let i = 0; i < agents.length; i++) {
       const agent = agents[i];
 
-      for (let j = i + 1; j < agents.length; j++) {
+      for (let j = i; j < agents.length; j++) {
         const other = agents[j];
         const dist = agent.getDistance(other);
 
-        if (dist > 200) continue;
-        context.strokeStyle = 'white';
-        context.lineWidth = math.mapRange(dist, 0, 200, 3, 0);
-        context.beginPath();
-        context.moveTo(agent.pos.x, agent.pos.y);
-        context.lineTo(other.pos.x, other.pos.y);
-        context.stroke();
+        if (dist <= 200) {
+          if (!agent.connected) {
+            //agent.others.push(other);
+          }
+          agent.connected = true;
+          context.strokeStyle = 'white';
+          context.lineWidth = math.mapRange(dist, 0, 200, 3, 0);
+          context.beginPath();
+          context.moveTo(agent.pos.x, agent.pos.y);
+          context.lineTo(other.pos.x, other.pos.y);
+          context.stroke();
 
+        } else {
+          agent.connected = false;
+        }
 
       }
     }
@@ -106,6 +120,8 @@ class Circle {
     this.vel = new Vector(random.range(-1, 1), random.range(-1, 1));
     this.width = random.range(1, 30);
     this.note = note;
+    this.others = [];
+    this.connected = false;
     this.lineWidth = 1;
     this.color = {
       h: Math.floor(Math.random() * 360),
@@ -113,6 +129,12 @@ class Circle {
       v: Math.floor(Math.random() * 100)
     }
   }
+
+  findOther(agents, notes) {
+
+   
+  }
+
   currentNote(width, height) {
     if (this.pos.x <= 0 || this.pos.x >= width) return this.note;
     if (this.pos.y <= 0 || this.pos.y >= height) return this.note;
