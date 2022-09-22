@@ -21,10 +21,25 @@ const sketch = ({ context, width, height }) => {
   let midiOutputs = null;
   let midiOutput = null;
   let channel = null;
- 
+  let currentNote = null;
+
+  window.addEventListener('playNote', (e) => {
+    channel.sendControlChange(21, Math.floor(math.mapRange(e.detail.pos.y, 0, width, 0, 127, true)));
+    channel.sendControlChange(22, Math.floor(math.mapRange(e.detail.pos.x, 0, width, 0, 127, true)));
+    channel.sendControlChange(7, Math.floor(math.mapRange(e.detail.pos.x, 0, width, 0, 127, true)));
+    channel.octaveOffset = Math.floor(random.range(0, 1));
+    channel.playNote(e.detail.note, { 
+      duration: random.range(1, 3000),
+      rawAttack: Math.floor(random.range(30,127))
+    });
+    console.log(Math.floor(math.mapRange(e.detail.pos.y, 0, width, 0, 127, true)));
+  });
+
   WebMidi.enable().then(function () {
+
     midiOutputs = WebMidi.outputs;
-    midiOutput = WebMidi.getOutputByName('iMac24 Bus 1');
+    console.log(midiOutputs);
+    midiOutput = WebMidi.getOutputByName('IAC Driver Bus 1');
     channel = midiOutput.channels[1];
     // channel.playNote("C3", { duration: 1000 });
     // midiOutput.sendAllSoundOff();
@@ -35,8 +50,8 @@ const sketch = ({ context, width, height }) => {
   //const myOutput = WebMidi.getOutputByName("SP-404MKII");
   const notes = new Array("A2", "G2", "F2", "C4", "D4", "E4");
 
-  for (let i = 0; i < 40; i++) {
-    agents.push(new Agent(random.range(0, width), random.range(0, height), notes[Math.floor(Math.random() * notes.length)]));
+  for (let i = 0; i < 16; i++) {
+    agents.push(new Circle(random.range(0, width), random.range(0, height), notes[Math.floor(Math.random() * notes.length)]));
   }
 
   return ({ context, width, height }) => {
@@ -84,9 +99,8 @@ class Vector {
   }
 }
 
-class Agent {
+class Circle {
   constructor(x, y, note) {
-    console.log(note);
     this.pos = new Vector(x, y);
     this.radius = random.range(3, 7);
     this.vel = new Vector(random.range(-1, 1), random.range(-1, 1));
@@ -99,6 +113,10 @@ class Agent {
       v: Math.floor(Math.random() * 100)
     }
   }
+  currentNote(width, height) {
+    if (this.pos.x <= 0 || this.pos.x >= width) return this.note;
+    if (this.pos.y <= 0 || this.pos.y >= height) return this.note;
+  }
 
   getDistance(v) {
     const dx = this.pos.x - v.pos.x
@@ -107,13 +125,18 @@ class Agent {
   }
 
   bounce(width, height) {
-    if (this.pos.x <= 0 || this.pos.x >= width) { this.vel.x *= -1};
-    if (this.pos.y <= 0 || this.pos.y >= height) this.vel.y *= -1;
+    if (this.pos.x - this.radius <= 0 || this.pos.x + this.radius >= width) this.vel.x *= -1;
+    if (this.pos.y - this.radius <= 0 || this.pos.y + this.radius >= height) this.vel.y *= -1;
   }
 
-  play(width, height,ch) {
-    if (this.pos.x <= 0 || this.pos.x >= width)  ch.playNote(this.note,{duration: 100});
-    if (this.pos.y <= 0 || this.pos.y >= height) ch.playNote(this.note,{duration: 100});
+  play(width, height, ch) {
+    if (this.pos.x - this.radius <= 0 || this.pos.x + this.radius >= width) {
+      // ch.playNote(this.note, { duration: random.range(1,3000) });
+      window.dispatchEvent(new CustomEvent('playNote', { detail: this }));
+    }
+    if (this.pos.y - this.radius <= 0 || this.pos.y + this.radius >= height) {
+      window.dispatchEvent(new CustomEvent('playNote', { detail: this }))
+    }
   }
 
   update() {
@@ -132,8 +155,6 @@ class Agent {
     //context.strokeStyle = `hsl(${this.color.h},${this.color.s}% ,${this.color.v}%)`;
     context.strokeStyle = 'white';
     context.stroke();
-
-
     context.restore();
   }
 }
