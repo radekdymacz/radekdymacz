@@ -23,11 +23,34 @@ title: AI Automation | Empower People
         .slogan {
             font-size: 3rem;
             font-weight: bold;
-            color: white;
+            background: linear-gradient(135deg, #60a5fa 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
             max-width: 900px;
             margin: 0 auto;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
             line-height: 1.2;
+            animation: gradientFlow 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slogan {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
