@@ -22,30 +22,6 @@
             height: 100%;
             z-index: -1;
         }
-        .github-link {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.5rem;
-            padding: 10px;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .github-link:hover {
-            color: white;
-            transform: translateY(-2px);
-            background: rgba(0, 0, 0, 0.3);
-        }
         .page-content {
             min-height: 100vh;
             color: white;
@@ -80,7 +56,8 @@
       "url": "https://radekdymacz.github.io",
       "sameAs": [
         "https://github.com/radekdymacz",
-        "https://linkedin.com/in/radekdymacz"
+        "https://linkedin.com/in/radekdymacz",
+        "https://cal.com/radek-dymacz"
       ],
       "knowsAbout": [
         "Artificial Intelligence",
@@ -90,16 +67,17 @@
         "AI Agents",
         "Digital Transformation",
         "Cloud Solutions"
-      ]
+      ],
+      "potentialAction": {
+        "@type": "Action",
+        "name": "Schedule Meeting",
+        "url": "https://cal.com/radek-dymacz"
+      }
     }
     </script>
 </head>
 <body class="bg-black">
     <div id="background-container"></div>
-    
-    <a href="https://github.com/radekdymacz" class="github-link" aria-label="GitHub Profile">
-        <i class="fab fa-github"></i>
-    </a>
 
     <main class="page-content">
         <div class="wrapper">

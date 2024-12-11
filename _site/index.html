@@ -22,30 +22,6 @@
             height: 100%;
             z-index: -1;
         }
-        .github-link {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.5rem;
-            padding: 10px;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .github-link:hover {
-            color: white;
-            transform: translateY(-2px);
-            background: rgba(0, 0, 0, 0.3);
-        }
         .page-content {
             min-height: 100vh;
             color: white;
@@ -80,7 +56,8 @@
       "url": "https://radekdymacz.github.io",
       "sameAs": [
         "https://github.com/radekdymacz",
-        "https://linkedin.com/in/radekdymacz"
+        "https://linkedin.com/in/radekdymacz",
+        "https://cal.com/radek-dymacz"
       ],
       "knowsAbout": [
         "Artificial Intelligence",
@@ -90,16 +67,17 @@
         "AI Agents",
         "Digital Transformation",
         "Cloud Solutions"
-      ]
+      ],
+      "potentialAction": {
+        "@type": "Action",
+        "name": "Schedule Meeting",
+        "url": "https://cal.com/radek-dymacz"
+      }
     }
     </script>
 </head>
 <body class="bg-black">
     <div id="background-container"></div>
-    
-    <a href="https://github.com/radekdymacz" class="github-link" aria-label="GitHub Profile">
-        <i class="fab fa-github"></i>
-    </a>
 
     <main class="page-content">
         <div class="wrapper">
@@ -193,6 +171,17 @@
                 background-position: 0% 50%;
             }
         }
+        .social-links a {
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .social-links a:hover {
+            opacity: 1;
+        }
+        /* Remove the GitHub corner styles */
+        .github-corner {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -200,6 +189,23 @@
         <div class="slogan-container">
             <h1 class="static-part">Empowering</h1>
             <h2 class="dynamic-part" id="rotating-text"></h2>
+            <div class="social-links" style="margin-top: 2rem; display: flex; gap: 1.5rem; align-items: center; justify-content: center;">
+                <a href="https://github.com/radekdymacz" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <svg height="24" width="24" viewBox="0 0 16 16" style="fill: currentColor;">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    GitHub
+                </a>
+                <a href="https://cal.com/radek-dymacz" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <svg height="24" width="24" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    Schedule Meeting
+                </a>
+            </div>
         </div>
     </div>
 
