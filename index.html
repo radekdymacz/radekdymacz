@@ -21,16 +21,13 @@ title: AI Automation | Empower People
         }
         html, body {
             height: 100%;
-            width: 100%;
+            margin: 0;
             overflow: hidden;
         }
         .container {
-            width: 100vw;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            display: grid;
+            place-items: center;
             z-index: 10;
         }
         .slogan-container {
@@ -40,8 +37,7 @@ title: AI Automation | Empower People
             gap: clamp(0.5rem, 2vw, 1.5rem);
             padding: 1rem;
             width: min(90%, 1200px);
-            margin: 0 auto;
-            transform: translateY(-10vh);
+            margin-top: -10vh;
         }
         .static-part {
             font-family: 'Unbounded', sans-serif;
