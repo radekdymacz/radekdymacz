@@ -68,33 +68,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Automation | Empower People</title>
+    <title>AI-Driven Automation</title>
     <style>
-        .hero-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
             width: 100%;
-            padding: 0 20px;
+            overflow: hidden;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
             z-index: 10;
         }
-        .slogan {
-            font-size: 3rem;
+        .slogan-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(0.5rem, 2vw, 1.5rem);
+            padding: 1rem;
+            width: min(90%, 1200px);
+            margin: 0 auto;
+            transform: translateY(-10vh);
+        }
+        .static-part {
+            font-size: clamp(4rem, 12vw, 8rem);
             font-weight: bold;
             background: linear-gradient(135deg, #60a5fa 0%, #8b5cf6 50%, #ec4899 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-fill-color: transparent;
-            max-width: 900px;
-            margin: 0 auto;
-            line-height: 1.2;
             animation: gradientFlow 8s ease infinite;
             background-size: 200% 200%;
+            margin: 0;
+            line-height: 1.1;
+            text-align: center;
+            width: 100%;
         }
-
+        .dynamic-part {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: bold;
+            background: linear-gradient(135deg, #60a5fa 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 8s ease infinite;
+            background-size: 200% 200%;
+            transition: all 0.3s ease-out;
+            opacity: 1;
+            margin: 0;
+            line-height: 1.2;
+            text-align: center;
+            width: 100%;
+            max-width: min(800px, 90vw);
+        }
+        .dynamic-part.fade-out {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .dynamic-part.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
         @keyframes gradientFlow {
             0% {
                 background-position: 0% 50%;
@@ -106,20 +149,60 @@
                 background-position: 0% 50%;
             }
         }
-
-        @media (max-width: 768px) {
-            .slogan {
-                font-size: 2.5rem;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="hero-content">
-        <div class="slogan">
-            Empower People with AI-Driven Automation and Expertise
+    <div class="container">
+        <div class="slogan-container">
+            <h1 class="static-part">Empowering</h1>
+            <h2 class="dynamic-part" id="rotating-text"></h2>
         </div>
     </div>
+
+    <script>
+        const phrases = [
+            "People with AI-Driven Automation and Expertise",
+            "Teams with Intelligent Automation Solutions",
+            "Businesses with AI-Powered Expertise",
+            "Professionals with Smart Automation Tools",
+            "Organizations with AI-Driven Intelligence",
+            "Enterprises with Automated Excellence",
+            "Workflows with AI-Enhanced Precision",
+            "Operations with Intelligent Automation",
+            "Industries with AI-Driven Innovation",
+            "Companies with Smart Technology Solutions",
+            "Processes with AI-Powered Efficiency",
+            "Projects with Intelligent Automation",
+            "Development with AI-Enhanced Tools",
+            "Services with Smart Automation",
+            "Solutions with AI-Driven Excellence",
+            "Systems with Intelligent Integration",
+            "Performance with AI-Powered Precision",
+            "Success with Smart Automation"
+        ];
+
+        // Start with a random phrase
+        let currentIndex = Math.floor(Math.random() * phrases.length);
+        const dynamicPart = document.getElementById('rotating-text');
+        dynamicPart.textContent = phrases[currentIndex];
+
+        function updatePhrase() {
+            dynamicPart.classList.add('fade-out');
+            
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % phrases.length;
+                dynamicPart.textContent = phrases[currentIndex];
+                dynamicPart.classList.remove('fade-out');
+                dynamicPart.classList.add('fade-in');
+                
+                setTimeout(() => {
+                    dynamicPart.classList.remove('fade-in');
+                }, 500);
+            }, 500);
+        }
+
+        setInterval(updatePhrase, 15000);
+    </script>
 </body>
 </html>
 
