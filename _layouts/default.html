@@ -53,6 +53,30 @@
             z-index: 1;
         }
     </style>
+    {% seo %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Radek Dymacz",
+      "jobTitle": "AI and Automation Expert",
+      "description": "Expert in AI, Machine Learning, Cloud Architecture, and Intelligent Automation",
+      "url": "https://radekdymacz.github.io",
+      "sameAs": [
+        "https://github.com/radekdymacz",
+        "https://linkedin.com/in/radekdymacz"
+      ],
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Cloud Architecture",
+        "Enterprise Automation",
+        "AI Agents",
+        "Digital Transformation",
+        "Cloud Solutions"
+      ]
+    }
+    </script>
 </head>
 <body class="bg-black">
     <div id="background-container"></div>
@@ -151,5 +175,14 @@
             renderer.setSize(width, height);
         });
     </script>
+    {% if site.google_analytics %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ site.google_analytics }}');
+    </script>
+    {% endif %}
 </body>
 </html>

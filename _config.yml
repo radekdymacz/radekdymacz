@@ -1,14 +1,26 @@
-title: AI-Driven Automation
-description: Empowering People with AI-Driven Automation and Expertise
-url: "https://radekdymacz.github.io"
-baseurl: ""
+title: Radek Dymacz | AI & Automation Expert
+description: Expert in AI, Machine Learning, Cloud Architecture, and Intelligent Automation. Specializing in AI agents, cloud solutions, and enterprise automation.
+url: https://radekdymacz.github.io
+author: Radek Dymacz
+twitter:
+  username: radekdymacz
+  card: summary_large_image
+social:
+  name: Radek Dymacz
+  links:
+    - https://github.com/radekdymacz
+    - https://linkedin.com/in/radekdymacz
 
 # Build settings
 markdown: kramdown
-theme: minima
+theme: jekyll-theme-minimal
+
 plugins:
-  - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Google Analytics
+google_analytics: # Add your Google Analytics ID here
 
 # Exclude from processing
 exclude:
