@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCP and Terraform Setup Guide - Agentic Framework</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --gradient-start: #60a5fa;
+            --gradient-middle: #8b5cf6;
+            --gradient-end: #ec4899;
+            --border: rgba(255, 255, 255, 0.1);
+            --code-bg: #282828;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+
+        .docs-container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+            background: transparent;
+        }
+
+        .sidebar {
+            width: 280px;
+            padding: 2rem;
+            background: linear-gradient(180deg, 
+                rgba(30, 30, 30, 0.4) 0%, 
+                rgba(25, 25, 25, 0.4) 100%);
+            border-right: 1px solid var(--border);
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            background: transparent;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Remove box shadows and borders from various elements */
+        pre, code, blockquote, table {
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Make code blocks blend with the background */
+        pre {
+            background: rgba(40, 40, 40, 0.95) !important;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid rgba(96, 165, 250, 0.1);
+            box-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                0 4px 8px rgba(0, 0, 0, 0.1),
+                0 -1px 1px rgba(255, 255, 255, 0.05) inset;
+        }
+
+        code {
+            background: rgba(40, 40, 40, 0.3) !important;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+        }
+
+        /* Tables with subtle backgrounds */
+        table {
+            background: rgba(30, 30, 30, 0.3);
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: none;
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem;
+        }
+
+        th {
+            background: rgba(40, 40, 40, 0.3);
+            font-weight: 600;
+        }
+
+        /* Blockquotes with subtle styling */
+        blockquote {
+            background: rgba(30, 30, 30, 0.95);
+            border-left: 3px solid var(--gradient-middle);
+            margin: 1.5rem 0;
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        blockquote::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                var(--gradient-start) 0%,
+                transparent 100%);
+            opacity: 0.2;
+        }
+
+        /* Navigation links */
+        .sidebar a {
+            color: var(--text-primary);
+            opacity: 0.85;
+            text-decoration: none;
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            background: transparent;
+            position: relative;
+            border: 1px solid transparent;
+        }
+
+        .sidebar a:hover {
+            background: rgba(96, 165, 250, 0.1);
+            color: var(--text-primary);
+            opacity: 1;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
+        }
+
+        .sidebar a.active {
+            background: linear-gradient(135deg, 
+                rgba(96, 165, 250, 0.15) 0%, 
+                rgba(139, 92, 246, 0.15) 50%, 
+                rgba(236, 72, 153, 0.15) 100%);
+            color: #fff;
+            opacity: 1;
+            font-weight: 500;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            box-shadow: 
+                0 2px 4px rgba(96, 165, 250, 0.1),
+                0 4px 8px rgba(139, 92, 246, 0.1),
+                0 -1px 1px rgba(236, 72, 153, 0.05) inset,
+                0 1px 1px rgba(255, 255, 255, 0.1) inset;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar a.active:hover {
+            transform: translateY(-1px);
+            box-shadow: 
+                0 4px 12px rgba(96, 165, 250, 0.2),
+                0 6px 16px rgba(139, 92, 246, 0.2),
+                0 -1px 1px rgba(236, 72, 153, 0.05) inset,
+                0 1px 1px rgba(255, 255, 255, 0.1) inset;
+        }
+
+        /* Content links with 3D effect */
+        .content a:not(.anchor) {
+            color: var(--gradient-start);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            background: linear-gradient(135deg, 
+                rgba(96, 165, 250, 0.1) 0%, 
+                rgba(139, 92, 246, 0.1) 50%, 
+                rgba(236, 72, 153, 0.1) 100%);
+            transition: all 0.2s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .content a:not(.anchor):hover {
+            color: #fff;
+            background: linear-gradient(135deg, 
+                rgba(96, 165, 250, 0.9) 0%, 
+                rgba(139, 92, 246, 0.9) 50%, 
+                rgba(236, 72, 153, 0.9) 100%);
+            transform: translateY(-1px);
+            box-shadow: 
+                0 4px 12px rgba(96, 165, 250, 0.3),
+                0 6px 16px rgba(139, 92, 246, 0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Headings */
+        h1, h2 {
+            font-family: 'Unbounded', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+
+        /* Content Styles */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        p, li, ul, ol {
+            color: var(--text-primary);
+            opacity: 1;
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--gradient-start);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--gradient-end);
+            text-decoration: underline;
+        }
+
+        /* Code highlighting improvements */
+        .highlight {
+            background: var(--code-bg);
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .highlight pre {
+            margin: 0;
+            padding: 1rem;
+        }
+
+        /* Language keywords */
+        .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt {
+            color: #c678dd;  /* Purple */
+        }
+
+        /* Strings */
+        .highlight .s, .highlight .s1, .highlight .s2 {
+            color: #98c379;  /* Green */
+        }
+
+        /* Numbers */
+        .highlight .m, .highlight .mi, .highlight .mf {
+            color: #d19a66;  /* Orange */
+        }
+
+        /* Functions */
+        .highlight .nf, .highlight .nb {
+            color: #61afef;  /* Blue */
+        }
+
+        /* Classes */
+        .highlight .nc {
+            color: #e5c07b;  /* Light Yellow */
+        }
+
+        /* Comments */
+        .highlight .c, .highlight .c1, .highlight .cm {
+            color: #7f848e;  /* Gray */
+            font-style: italic;
+        }
+
+        /* Variables */
+        .highlight .n {
+            color: var(--text-primary);  /* Bright white */
+        }
+
+        /* Operators */
+        .highlight .o {
+            color: #56b6c2;  /* Cyan */
+        }
+
+        /* Function parameters */
+        .highlight .p {
+            color: #abb2bf;  /* Light gray */
+        }
+
+        /* Import/from keywords */
+        .highlight .kn {
+            color: #c678dd;  /* Purple */
+        }
+
+        /* Built-in functions */
+        .highlight .nb {
+            color: #61afef;  /* Blue */
+        }
+
+        /* String interpolation */
+        .highlight .si {
+            color: #56b6c2;  /* Cyan */
+        }
+
+        /* Decorator @ symbol */
+        .highlight .nd {
+            color: #e5c07b;  /* Light Yellow */
+        }
+
+        /* Class names in decorators */
+        .highlight .na {
+            color: #61afef;  /* Blue */
+        }
+
+        /* Boolean values */
+        .highlight .kc {
+            color: #d19a66;  /* Orange */
+        }
+
+        /* Self keyword */
+        .highlight .bp {
+            color: #e06c75;  /* Red */
+        }
+
+        /* Module names in imports */
+        .highlight .nn {
+            color: var(--text-primary);  /* Bright white for module names */
+        }
+
+        /* Import statement */
+        .highlight .kn, .highlight .k, .highlight .kc {
+            color: #c678dd;  /* Bright purple for 'import', 'from' keywords */
+        }
+
+        /* Class/object being imported */
+        .highlight .n {
+            color: #e5c07b;  /* Bright yellow for imported names */
+        }
+
+        /* Fix for module attributes */
+        .highlight .na {
+            color: var(--text-primary);  /* Bright white for module attributes */
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+        }
+
+        th {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--text-primary);
+            opacity: 1;
+        }
+
+        /* Lists */
+        ul, ol {
+            padding-left: 1.5rem;
+            opacity: 1;
+        }
+
+        li {
+            margin: 0.75rem 0;
+            opacity: 1;
+        }
+
+        /* Horizontal Rule */
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2rem 0;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Feature list specific styles */
+        .content ul li strong {
+            color: var(--text-primary);
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        /* Ensure strong and emphasis are fully visible */
+        strong, em {
+            color: var(--text-primary);
+            opacity: 1;
+        }
+
+        /* Button/link styling */
+        .content a:not(.anchor) {
+            color: var(--gradient-start);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            background: linear-gradient(135deg, 
+                rgba(96, 165, 250, 0.1) 0%, 
+                rgba(139, 92, 246, 0.1) 50%, 
+                rgba(236, 72, 153, 0.1) 100%);
+            transition: all 0.2s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .content a:not(.anchor):hover {
+            color: #fff;
+            background: linear-gradient(135deg, 
+                rgba(96, 165, 250, 0.9) 0%, 
+                rgba(139, 92, 246, 0.9) 50%, 
+                rgba(236, 72, 153, 0.9) 100%);
+            transform: translateY(-1px);
+            box-shadow: 
+                0 4px 12px rgba(96, 165, 250, 0.3),
+                0 6px 16px rgba(139, 92, 246, 0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="docs-container">
+        <nav class="sidebar">
+            <h2>Agentic Docs</h2>
+            
+            <h3>Getting Started</h3>
+            <ul>
+                <li><a href="/docs/agentic/" >Overview</a></li>
+                <li><a href="/docs/agentic/guides/quickstart" >Quick Start</a></li>
+                <li><a href="/docs/agentic/guides/installation" >Installation</a></li>
+            </ul>
+
+            <h3>Guides</h3>
+            <ul>
+                <li><a href="/docs/agentic/guides/basic-usage" >Basic Usage</a></li>
+                <li><a href="/docs/agentic/guides/tools" >Working with Tools</a></li>
+                <li><a href="/docs/agentic/guides/agents" >Creating Agents</a></li>
+            </ul>
+
+            <h3>API Reference</h3>
+            <ul>
+                <li><a href="/docs/agentic/api/agent" >Agent Class</a></li>
+                <li><a href="/docs/agentic/api/tools" >Tools</a></li>
+                <li><a href="/docs/agentic/api/llm" >LLM Integration</a></li>
+            </ul>
+
+            <h3>Examples</h3>
+            <ul>
+                <li><a href="/docs/agentic/examples/basic" >Basic Examples</a></li>
+                <li><a href="/docs/agentic/examples/advanced" >Advanced Usage</a></li>
+            </ul>
+        </nav>
+        
+        <main class="content">
+            <h1 id="gcp-and-terraform-setup-guide">GCP and Terraform Setup Guide</h1>
+
+<p>This guide explains how to set up Google Cloud Platform (GCP) resources and Terraform for secure secrets management.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>Google Cloud Platform account</li>
+  <li><code class="language-plaintext highlighter-rouge">gcloud</code> CLI installed</li>
+  <li>Terraform installed</li>
+</ul>
+
+<h2 id="setup-steps">Setup Steps</h2>
+
+<h3 id="1-create-state-bucket">1. Create State Bucket</h3>
+
+<p>Run the following script to set up the GCP state bucket and enable necessary APIs:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/01_create_state_bucket.sh
+</code></pre></div></div>
+
+<p>This script will:</p>
+<ul>
+  <li>Create a GCS bucket for Terraform state</li>
+  <li>Enable required GCP APIs</li>
+  <li>Configure environment variables</li>
+</ul>
+
+<h3 id="2-setup-terraform-permissions">2. Setup Terraform Permissions</h3>
+
+<p>Run the following script to create and configure the Terraform service account:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/02_setup_terraform_permissions.sh
+</code></pre></div></div>
+
+<p>This script will:</p>
+<ul>
+  <li>Create a service account for Terraform</li>
+  <li>Grant necessary permissions (Editor and IAM Admin roles)</li>
+  <li>Generate and save credentials</li>
+</ul>
+
+<h3 id="3-initialize-terraform">3. Initialize Terraform</h3>
+
+<p>Run the following script to initialize Terraform with the service account:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/03_init_terraform.sh
+</code></pre></div></div>
+
+<p>This script will:</p>
+<ul>
+  <li>Initialize Terraform with GCS backend</li>
+  <li>Create <code class="language-plaintext highlighter-rouge">terraform.tfvars</code> from environment variables</li>
+</ul>
+
+<h3 id="4-apply-terraform-configuration">4. Apply Terraform Configuration</h3>
+
+<p>Apply the Terraform configuration to set up Secret Manager:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>terraform
+terraform plan    <span class="c"># Review changes</span>
+terraform apply   <span class="c"># Apply changes</span>
+</code></pre></div></div>
+
+<p>This will:</p>
+<ul>
+  <li>Enable Secret Manager API</li>
+  <li>Create a dedicated service account for secrets</li>
+  <li>Generate and save credentials</li>
+</ul>
+
+<h2 id="file-structure">File Structure</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── scripts/
+│   ├── 01_create_state_bucket.sh
+│   ├── 02_setup_terraform_permissions.sh
+│   └── 03_init_terraform.sh
+└── terraform/
+    ├── main.tf
+    ├── variables.tf
+    ├── outputs.tf
+    └── terraform.tfvars.example
+</code></pre></div></div>
+
+<h2 id="security-notes">Security Notes</h2>
+
+<ul>
+  <li>All service account keys are stored in <code class="language-plaintext highlighter-rouge">~/.config/gcloud/</code> with 0600 permissions</li>
+  <li>Sensitive files are added to <code class="language-plaintext highlighter-rouge">.gitignore</code></li>
+  <li>Service accounts use least privilege principle</li>
+</ul>
+
+        </main>
+    </div>
+</body>
+</html>
