@@ -1,7 +1,7 @@
 ---
 layout: agentic
-title: API Documentation
-description: API Documentation documentation for Agentic Framework
+title: API Reference
+description: Detailed API documentation for the Agentic Framework
 ---
 
 # API Documentation

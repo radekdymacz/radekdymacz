@@ -1,7 +1,7 @@
 ---
 layout: agentic
 title: Development Guide
-description: Development Guide documentation for Agentic Framework
+description: Contributing and development guidelines for the Agentic Framework
 ---
 
 # Development Guide
@@ -20,7 +20,7 @@ pip install -e .
 ```
 
 3. Set up GCP and Secret Manager:
-Follow the [GCP and Terraform Setup Guide](setup.md).
+Follow the [GCP and Terraform Setup Guide](setup).
 
 ## Running Tests
 
@@ -81,4 +81,3 @@ tests/              # Test files
 docs/               # Documentation
 scripts/            # Utility scripts
 terraform/          # Infrastructure as code
-```

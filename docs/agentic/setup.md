@@ -1,7 +1,7 @@
 ---
 layout: agentic
-title: GCP and Terraform Setup Guide
-description: GCP and Terraform Setup Guide documentation for Agentic Framework
+title: Setup Guide
+description: Installation and configuration guide for the Agentic Framework
 ---
 
 # GCP and Terraform Setup Guide

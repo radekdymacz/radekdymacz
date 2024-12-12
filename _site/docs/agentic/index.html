@@ -455,38 +455,34 @@
         <nav class="sidebar">
             <h2>Agentic Docs</h2>
             
-            <h3>Getting Started</h3>
+            <h3>Documentation</h3>
             <ul>
-                <li><a href="/docs/agentic/" class="active">Overview</a></li>
-                <li><a href="/docs/agentic/guides/quickstart" >Quick Start</a></li>
-                <li><a href="/docs/agentic/guides/installation" >Installation</a></li>
+                <li><a href="/docs/agentic/" class="active">Home</a></li>
+                <li><a href="/docs/agentic/overview" >Architecture</a></li>
+                <li><a href="/docs/agentic/setup" >Setup Guide</a></li>
+                <li><a href="/docs/agentic/development" >Development</a></li>
             </ul>
 
-            <h3>Guides</h3>
-            <ul>
-                <li><a href="/docs/agentic/guides/basic-usage" >Basic Usage</a></li>
-                <li><a href="/docs/agentic/guides/tools" >Working with Tools</a></li>
-                <li><a href="/docs/agentic/guides/agents" >Creating Agents</a></li>
-            </ul>
-
+            
+            
             <h3>API Reference</h3>
             <ul>
-                <li><a href="/docs/agentic/api/agent" >Agent Class</a></li>
-                <li><a href="/docs/agentic/api/tools" >Tools</a></li>
-                <li><a href="/docs/agentic/api/llm" >LLM Integration</a></li>
+                
+                <li><a href="/docs/agentic/api.html" >API Reference</a></li>
+                
             </ul>
+            
 
-            <h3>Examples</h3>
+            <h3>Links</h3>
             <ul>
-                <li><a href="/docs/agentic/examples/basic" >Basic Examples</a></li>
-                <li><a href="/docs/agentic/examples/advanced" >Advanced Usage</a></li>
+                <li><a href="https://github.com/radekdymacz/agentic" target="_blank">GitHub</a></li>
             </ul>
         </nav>
         
         <main class="content">
             <h1 id="agentic-framework">Agentic Framework</h1>
 
-<p>Agentic is a powerful framework for building AI agents that can interact with tools, maintain conversation history, and execute complex tasks.</p>
+<p>Agentic is a powerful framework for building AI agents that can interact with tools, maintain conversation history, and execute complex tasks. Built with a focus on modularity and extensibility, it provides a robust foundation for creating sophisticated AI applications.</p>
 
 <div style="width: 100%; height: 600px; margin: 20px 0;">
 <iframe src="https://link.excalidraw.com/readonly/Fkc3umVB0GohLoVTnxtE" width="100%" height="100%" style="border: none;"></iframe>
@@ -494,13 +490,26 @@
 
 <h2 id="overview">Overview</h2>
 
-<p>The Agentic Framework provides a flexible and powerful foundation for building AI agents that can:</p>
+<p>The Agentic Framework is designed to simplify the development of AI agents while providing powerful capabilities:</p>
+
+<h3 id="core-features">Core Features</h3>
+
 <ul>
-  <li>Execute complex tasks using tools</li>
-  <li>Maintain conversation history</li>
-  <li>Integrate with various LLM providers</li>
-  <li>Handle infrastructure automation</li>
-  <li>Manage configuration and secrets</li>
+  <li><strong>Tool-based Architecture</strong>: Build and integrate custom tools with a simple, consistent interface</li>
+  <li><strong>Conversation Management</strong>: Built-in support for maintaining context and history</li>
+  <li><strong>LLM Integration</strong>: First-class support for modern language models</li>
+  <li><strong>Infrastructure Automation</strong>: Seamless cloud integration and deployment</li>
+  <li><strong>Security</strong>: Built-in secrets management and secure configuration</li>
+</ul>
+
+<h3 id="key-benefits">Key Benefits</h3>
+
+<ul>
+  <li><strong>Rapid Development</strong>: Get started quickly with intuitive APIs and comprehensive documentation</li>
+  <li><strong>Extensibility</strong>: Easy to extend with custom tools and integrations</li>
+  <li><strong>Cloud-Native</strong>: Built for modern cloud environments with infrastructure as code</li>
+  <li><strong>Type Safety</strong>: Strong typing throughout for better development experience</li>
+  <li><strong>Production Ready</strong>: Battle-tested in real-world applications</li>
 </ul>
 
 <h2 id="quick-start">Quick Start</h2>
@@ -521,10 +530,10 @@ agent.run<span class="o">(</span><span class="s2">"Hello, world!"</span><span cl
 <h2 id="documentation-structure">Documentation Structure</h2>
 
 <ul>
-  <li><strong><a href="/docs/agentic/overview.html">Overview</a></strong> - Architecture and key concepts</li>
-  <li><strong><a href="/docs/agentic/setup.html">Setup Guide</a></strong> - Installation and configuration</li>
-  <li><strong><a href="/docs/agentic/api.html">API Reference</a></strong> - Detailed API documentation</li>
-  <li><strong><a href="/docs/agentic/development.html">Development Guide</a></strong> - Contributing and development</li>
+  <li><strong><a href="overview">Overview</a></strong> - Architecture and key concepts</li>
+  <li><strong><a href="setup">Setup Guide</a></strong> - Installation and configuration</li>
+  <li><strong><a href="api">API Reference</a></strong> - Detailed API documentation</li>
+  <li><strong><a href="development">Development Guide</a></strong> - Contributing and development</li>
 </ul>
 
 <h2 id="key-features">Key Features</h2>
@@ -534,23 +543,44 @@ agent.run<span class="o">(</span><span class="s2">"Hello, world!"</span><span cl
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">agentic</span> <span class="kn">import</span> <span class="n">Tool</span>
 
 <span class="k">class</span> <span class="nc">MyTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">):</span>
+    <span class="s">"""Custom tool for specific tasks"""</span>
     <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">"Tool result"</span>
+
+<span class="c1"># Register with agent
+</span><span class="n">agent</span><span class="p">.</span><span class="n">register_tool</span><span class="p">(</span><span class="n">MyTool</span><span class="p">())</span>
 </code></pre></div></div>
 
 <h3 id="conversation-management">Conversation Management</h3>
 <p>Built-in support for maintaining context and history:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">agent</span><span class="p">.</span><span class="n">chat</span><span class="p">(</span><span class="s">"What's the weather?"</span><span class="p">)</span>
-<span class="n">agent</span><span class="p">.</span><span class="n">chat</span><span class="p">(</span><span class="s">"Should I bring an umbrella?"</span><span class="p">)</span>  <span class="c1"># Maintains context
-</span></code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Conversations maintain context
+</span><span class="n">agent</span><span class="p">.</span><span class="n">chat</span><span class="p">(</span><span class="s">"What's the weather?"</span><span class="p">)</span>
+<span class="n">agent</span><span class="p">.</span><span class="n">chat</span><span class="p">(</span><span class="s">"Should I bring an umbrella?"</span><span class="p">)</span>  <span class="c1"># Understands context
+</span>
+<span class="c1"># Access history
+</span><span class="n">history</span> <span class="o">=</span> <span class="n">agent</span><span class="p">.</span><span class="n">get_history</span><span class="p">()</span>
+</code></pre></div></div>
 
 <h3 id="cloud-integration">Cloud Integration</h3>
 <p>Seamless integration with cloud services:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">agentic.cloud</span> <span class="kn">import</span> <span class="n">GCPIntegration</span>
 
-<span class="n">gcp</span> <span class="o">=</span> <span class="n">GCPIntegration</span><span class="p">()</span>
+<span class="c1"># Initialize cloud integration
+</span><span class="n">gcp</span> <span class="o">=</span> <span class="n">GCPIntegration</span><span class="p">()</span>
 <span class="n">gcp</span><span class="p">.</span><span class="n">setup_project</span><span class="p">(</span><span class="s">"my-project"</span><span class="p">)</span>
+
+<span class="c1"># Use cloud services
+</span><span class="n">secret</span> <span class="o">=</span> <span class="n">gcp</span><span class="p">.</span><span class="n">get_secret</span><span class="p">(</span><span class="s">"api-key"</span><span class="p">)</span>
 </code></pre></div></div>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<ol>
+  <li>Follow the <a href="setup">Setup Guide</a> to install and configure Agentic</li>
+  <li>Check out the <a href="overview">Overview</a> to understand the architecture</li>
+  <li>Read the <a href="development">Development Guide</a> to start contributing</li>
+  <li>Browse the <a href="api">API Reference</a> for detailed documentation</li>
+</ol>
 
         </main>
     </div>

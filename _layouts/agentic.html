@@ -455,31 +455,27 @@
         <nav class="sidebar">
             <h2>Agentic Docs</h2>
             
-            <h3>Getting Started</h3>
+            <h3>Documentation</h3>
             <ul>
-                <li><a href="{{ '/docs/agentic/' | relative_url }}" {% if page.url == '/docs/agentic/' %}class="active"{% endif %}>Overview</a></li>
-                <li><a href="{{ '/docs/agentic/guides/quickstart' | relative_url }}" {% if page.url == '/docs/agentic/guides/quickstart' %}class="active"{% endif %}>Quick Start</a></li>
-                <li><a href="{{ '/docs/agentic/guides/installation' | relative_url }}" {% if page.url == '/docs/agentic/guides/installation' %}class="active"{% endif %}>Installation</a></li>
+                <li><a href="{{ '/docs/agentic/' | relative_url }}" {% if page.url == '/docs/agentic/' %}class="active"{% endif %}>Home</a></li>
+                <li><a href="{{ '/docs/agentic/overview' | relative_url }}" {% if page.url == '/docs/agentic/overview' %}class="active"{% endif %}>Architecture</a></li>
+                <li><a href="{{ '/docs/agentic/setup' | relative_url }}" {% if page.url == '/docs/agentic/setup' %}class="active"{% endif %}>Setup Guide</a></li>
+                <li><a href="{{ '/docs/agentic/development' | relative_url }}" {% if page.url == '/docs/agentic/development' %}class="active"{% endif %}>Development</a></li>
             </ul>
 
-            <h3>Guides</h3>
-            <ul>
-                <li><a href="{{ '/docs/agentic/guides/basic-usage' | relative_url }}" {% if page.url == '/docs/agentic/guides/basic-usage' %}class="active"{% endif %}>Basic Usage</a></li>
-                <li><a href="{{ '/docs/agentic/guides/tools' | relative_url }}" {% if page.url == '/docs/agentic/guides/tools' %}class="active"{% endif %}>Working with Tools</a></li>
-                <li><a href="{{ '/docs/agentic/guides/agents' | relative_url }}" {% if page.url == '/docs/agentic/guides/agents' %}class="active"{% endif %}>Creating Agents</a></li>
-            </ul>
-
+            {% assign api_docs = site.pages | where_exp: "item", "item.url contains '/docs/agentic/api'" %}
+            {% if api_docs.size > 0 %}
             <h3>API Reference</h3>
             <ul>
-                <li><a href="{{ '/docs/agentic/api/agent' | relative_url }}" {% if page.url == '/docs/agentic/api/agent' %}class="active"{% endif %}>Agent Class</a></li>
-                <li><a href="{{ '/docs/agentic/api/tools' | relative_url }}" {% if page.url == '/docs/agentic/api/tools' %}class="active"{% endif %}>Tools</a></li>
-                <li><a href="{{ '/docs/agentic/api/llm' | relative_url }}" {% if page.url == '/docs/agentic/api/llm' %}class="active"{% endif %}>LLM Integration</a></li>
+                {% for doc in api_docs %}
+                <li><a href="{{ doc.url | relative_url }}" {% if page.url == doc.url %}class="active"{% endif %}>{{ doc.title }}</a></li>
+                {% endfor %}
             </ul>
+            {% endif %}
 
-            <h3>Examples</h3>
+            <h3>Links</h3>
             <ul>
-                <li><a href="{{ '/docs/agentic/examples/basic' | relative_url }}" {% if page.url == '/docs/agentic/examples/basic' %}class="active"{% endif %}>Basic Examples</a></li>
-                <li><a href="{{ '/docs/agentic/examples/advanced' | relative_url }}" {% if page.url == '/docs/agentic/examples/advanced' %}class="active"{% endif %}>Advanced Usage</a></li>
+                <li><a href="https://github.com/radekdymacz/agentic" target="_blank">GitHub</a></li>
             </ul>
         </nav>
         

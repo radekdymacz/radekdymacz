@@ -1,7 +1,7 @@
 ---
 layout: agentic
-title: Architecture and Concepts
-description: Architecture and Concepts documentation for Agentic Framework
+title: Architecture Overview
+description: Architecture and key concepts of the Agentic Framework
 ---
 
 # Architecture and Concepts
