@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction - Agentic Framework</title>
+    <title>Layout - Agentic Framework</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <style>
         :root {
@@ -346,7 +346,7 @@
                         <ul>
                             
                             <li>
-                                <a href="/docs/agentic/" class="active">
+                                <a href="/docs/agentic/" >
                                     Introduction
                                 </a>
                             </li>
@@ -363,7 +363,7 @@
                         <ul>
                             
                             <li>
-                                <a href="/docs/agentic/layout/" >
+                                <a href="/docs/agentic/layout/" class="active">
                                     Layout
                                 </a>
                             </li>
@@ -394,103 +394,203 @@
 
             <main class="content">
                 <div class="content-header">
-                    <h1>Introduction</h1>
+                    <h1>Layout</h1>
                     
-                        <p class="description">Empowering People with AI Automation and Expertise</p>
+                        <p class="description">Detailed framework structure and component organization</p>
                     
                 </div>
 
                 <div class="content-body">
-                    <h1 id="agentic-framework">Agentic Framework</h1>
+                    <h1 id="framework-layout-and-organization">Framework Layout and Organization</h1>
 
-<p><strong>Empowering People with AI Automation and Expertise</strong></p>
+<p>The Agentic Framework follows a carefully organized structure that promotes modularity, extensibility, and clear separation of concerns. Below is the detailed layout of the framework:</p>
 
-<p>Agentic is an advanced open-source framework that bridges the gap between cutting-edge AI technology and human potential. Our mission is to democratize AI automation by providing a robust platform where sophisticated agent systems meet intuitive user experiences.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>agentic/
+├── __init__.py
+├── agent/                 # Agent core: Base agent implementations and interfaces
+│   ├── __init__.py
+│   ├── base.py           # Abstract base classes and interfaces for all agents
+│   ├── memory.py         # Agent-specific memory management and state persistence
+│   └── storage.py        # Storage mechanisms for agent state and data
+├── api/                  # API Layer: External interface definitions
+│   ├── __init__.py
+│   ├── routes.py         # API endpoint definitions and routing logic
+│   └── schemas.py        # Data validation schemas and API models
+├── document/            # Document Processing: Text and file handling
+│   ├── __init__.py
+│   ├── loader.py        # Document loading from various sources (PDF, HTML, etc.)
+│   └── parser.py        # Document parsing and content extraction
+├── embedder/            # Embedding Engine: Text vectorization
+│   ├── __init__.py
+│   ├── base.py          # Abstract embedding interfaces
+│   └── openai.py        # OpenAI-specific embedding implementations
+├── knowledge/           # Knowledge Management: Information storage and retrieval
+│   ├── __init__.py
+│   ├── base.py          # Base knowledge store interfaces
+│   └── vector.py        # Vector-based knowledge storage implementation
+├── llm/                 # Language Model Integration: LLM providers and interfaces
+│   ├── __init__.py
+│   ├── anthropic.py     # Anthropic Claude integration
+│   ├── openai.py        # OpenAI GPT integration
+│   └── base.py          # Common LLM interfaces and abstractions
+├── memory/             # Memory Systems: Long-term and working memory
+│   ├── __init__.py
+│   ├── conversation.py  # Conversation history and context management
+│   └── vector.py        # Vector-based memory storage
+├── model/              # Data Models: Core data structures
+│   ├── __init__.py
+│   ├── base.py         # Base model classes and interfaces
+│   └── config.py       # Configuration and settings models
+├── prompt/             # Prompt Engineering: Template management
+│   ├── __init__.py
+│   └── templates.py    # Prompt templates and generation logic
+├── reasoning/          # Reasoning Engines: Logic and inference
+│   ├── __init__.py
+│   └── chain.py        # Reasoning chain implementation
+├── storage/            # Storage Layer: Persistence backends
+│   ├── __init__.py
+│   ├── redis.py        # Redis storage implementation
+│   └── vector.py       # Vector storage implementation
+├── swarm/              # Swarm Intelligence: Multi-agent coordination
+│   ├── __init__.py
+│   ├── base.py         # Base swarm interfaces and abstractions
+│   ├── coordinator/    # Coordination and Orchestration
+│   │   ├── __init__.py
+│   │   ├── base.py     # Base coordinator interfaces
+│   │   └── router.py   # Message and task routing logic
+│   ├── hierarchy/      # Hierarchical Organization
+│   │   ├── __init__.py
+│   │   ├── base.py     # Hierarchy interfaces
+│   │   └── manager.py  # Hierarchy management and relationships
+│   ├── messaging/      # Communication System
+│   │   ├── __init__.py
+│   │   ├── base.py     # Messaging interfaces
+│   │   └── bus.py      # Message bus implementation
+│   └── scheduler/      # Task Management
+│       ├── __init__.py
+│       ├── base.py     # Scheduler interfaces
+│       └── engine.py   # Task scheduling and distribution
+├── tools/              # Tool Framework: External tool integration
+│   ├── __init__.py
+│   ├── base.py         # Base tool interfaces
+│   └── examples/       # Example tool implementations
+├── utils/              # Utilities: Helper functions and common code
+│   ├── __init__.py
+│   ├── logger.py       # Logging configuration and utilities
+│   └── helpers.py      # General helper functions
+├── vectordb/          # Vector Database: Vector storage and search
+│   ├── __init__.py
+│   ├── base.py        # Vector database interfaces
+│   └── pinecone.py    # Pinecone implementation
+└── workflow/           # Workflow Engine: Task execution patterns
+    ├── __init__.py
+    ├── base.py        # Base workflow interfaces
+    ├── concurrent.py  # Parallel execution patterns
+    ├── sequential.py  # Sequential execution patterns
+    └── graph.py       # Graph-based workflow execution
+</code></pre></div></div>
 
-<h2 id="core-purpose">Core Purpose</h2>
+<h2 id="component-details">Component Details</h2>
 
-<p>We empower individuals and organizations to:</p>
-
+<h3 id="1-core-agent-layer-agent">1. Core Agent Layer (<code class="language-plaintext highlighter-rouge">agent/</code>)</h3>
 <ul>
-  <li><strong>Automate Intelligently</strong>: Transform complex tasks into streamlined, AI-powered workflows</li>
-  <li><strong>Think &amp; Reason</strong>: Access advanced language models and reasoning engines for informed decision-making</li>
-  <li><strong>Learn &amp; Adapt</strong>: Leverage continuous learning through knowledge management and vector-based systems</li>
-  <li><strong>Collaborate</strong>: Harness multi-agent swarms that work together to solve complex problems</li>
-  <li><strong>Process &amp; Understand</strong>: Handle diverse information sources with intelligent document processing</li>
-  <li><strong>Create &amp; Innovate</strong>: Build customized AI solutions without deep technical expertise</li>
+  <li>Contains the fundamental agent implementations</li>
+  <li>Handles agent state management and persistence</li>
+  <li>Defines core interfaces that all agents must implement</li>
+  <li>Integrates with <code class="language-plaintext highlighter-rouge">model/</code> for core data structures and configurations</li>
 </ul>
 
-<h2 id="platform-for-innovation">Platform for Innovation</h2>
-
-<p>Agentic serves as a foundational platform for:</p>
-
+<p>Key files:</p>
 <ul>
-  <li><strong>Service Creation</strong>: Launch new AI-powered services and products rapidly</li>
-  <li><strong>Business Transformation</strong>: Build custom automation solutions for specific industry needs</li>
-  <li><strong>Innovation Labs</strong>: Prototype and experiment with new AI applications</li>
-  <li><strong>Enterprise Solutions</strong>: Scale from proof-of-concept to production-ready systems</li>
-  <li><strong>Integration Hub</strong>: Connect existing systems with next-generation AI capabilities</li>
-  <li><strong>Market Expansion</strong>: Enter new markets with AI-enhanced offerings</li>
+  <li><code class="language-plaintext highlighter-rouge">base.py</code>: Abstract base classes and interfaces defining agent behavior</li>
+  <li><code class="language-plaintext highlighter-rouge">memory.py</code>: Agent-specific memory management and state persistence</li>
+  <li><code class="language-plaintext highlighter-rouge">storage.py</code>: Storage mechanisms for agent state and data</li>
 </ul>
 
-<h2 id="technical-foundation">Technical Foundation</h2>
+<h3 id="2-intelligence-components">2. Intelligence Components</h3>
 
-<p>Our production-ready framework delivers:</p>
-
-<h3 id="1-modular-architecture">1. Modular Architecture</h3>
+<h4 id="language-models-llm">Language Models (<code class="language-plaintext highlighter-rouge">llm/</code>)</h4>
 <ul>
-  <li>Scalable from single agents to complex swarms</li>
-  <li>Multiple LLM providers and storage solutions</li>
-  <li>Extensible tool integration system</li>
+  <li>Integration with multiple LLM providers</li>
+  <li>Standardized interface for model interactions</li>
+  <li>Provider-specific optimizations</li>
 </ul>
 
-<h3 id="2-enterprise-features">2. Enterprise Features</h3>
+<h4 id="embedding-engine-embedder">Embedding Engine (<code class="language-plaintext highlighter-rouge">embedder/</code>)</h4>
 <ul>
-  <li>Built-in safety mechanisms</li>
-  <li>Transparent reasoning processes</li>
-  <li>Secure and private operations</li>
-  <li>Resource-efficient processing</li>
+  <li>Text vectorization capabilities</li>
+  <li>Semantic understanding interfaces</li>
+  <li>Provider-specific implementations (e.g., OpenAI)</li>
 </ul>
 
-<h3 id="3-user-centric-design">3. User-Centric Design</h3>
+<h4 id="knowledge-management-knowledge">Knowledge Management (<code class="language-plaintext highlighter-rouge">knowledge/</code>)</h4>
 <ul>
-  <li>Intuitive interfaces for all skill levels</li>
-  <li>Adaptable to individual needs</li>
-  <li>Clear visibility into AI decision-making</li>
-  <li>Seamless integration capabilities</li>
+  <li>Information storage and retrieval systems</li>
+  <li>Vector-based knowledge storage</li>
+  <li>Base interfaces for knowledge stores</li>
 </ul>
 
-<h2 id="growth-platform">Growth Platform</h2>
-
-<p>Agentic enables:</p>
-
+<h3 id="3-memory-and-storage-systems">3. Memory and Storage Systems</h3>
 <ul>
-  <li><strong>Service Providers</strong>: Build and deploy custom AI solutions for clients</li>
-  <li><strong>Startups</strong>: Rapidly prototype and launch AI-powered products</li>
-  <li><strong>Enterprises</strong>: Create internal tools and customer-facing services</li>
-  <li><strong>Developers</strong>: Extend and customize for specific use cases</li>
-  <li><strong>Partners</strong>: Integrate AI capabilities into existing platforms</li>
-  <li><strong>Consultants</strong>: Deliver AI transformation projects efficiently</li>
+  <li>Conversation history management through <code class="language-plaintext highlighter-rouge">memory/</code></li>
+  <li>Vector-based memory storage</li>
+  <li>Multiple storage backends (Redis, vector stores)</li>
+  <li>State persistence mechanisms</li>
 </ul>
 
-<h2 id="vision">Vision</h2>
-
-<p>We’re building a future where:</p>
-
+<h3 id="4-document-processing-document">4. Document Processing (<code class="language-plaintext highlighter-rouge">document/</code>)</h3>
 <ul>
-  <li>AI amplifies human expertise rather than replacing it</li>
-  <li>Complex technology becomes accessible to everyone</li>
-  <li>Automation enhances creativity and innovation</li>
-  <li>Collaborative AI systems multiply human potential</li>
-  <li>New business models emerge through AI integration</li>
-  <li>Innovation accelerates through shared capabilities</li>
+  <li>Handles various document formats (PDF, HTML)</li>
+  <li>Document parsing and content extraction</li>
+  <li>Text processing capabilities</li>
 </ul>
 
-<hr />
+<h3 id="5-swarm-intelligence-swarm">5. Swarm Intelligence (<code class="language-plaintext highlighter-rouge">swarm/</code>)</h3>
+<p>Multi-agent coordination system with components:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">coordinator/</code>: Orchestration and routing</li>
+  <li><code class="language-plaintext highlighter-rouge">hierarchy/</code>: Agent relationship management</li>
+  <li><code class="language-plaintext highlighter-rouge">messaging/</code>: Inter-agent communication</li>
+  <li><code class="language-plaintext highlighter-rouge">scheduler/</code>: Task distribution and management</li>
+</ul>
 
-<p>Whether you’re an individual seeking to boost productivity, a developer creating next-generation applications, or an enterprise transforming operations, Agentic provides the building blocks for turning AI possibilities into practical realities.</p>
+<h3 id="6-tool-and-workflow-systems">6. Tool and Workflow Systems</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">tools/</code>: Framework for external tool integration</li>
+  <li><code class="language-plaintext highlighter-rouge">workflow/</code>: Task execution patterns (sequential, concurrent, graph-based)</li>
+</ul>
 
-<p>Together, we’re creating a world where advanced AI technology serves as a force multiplier for human capability and achievement, while enabling continuous innovation and service creation across industries.</p>
+<h3 id="7-infrastructure-components">7. Infrastructure Components</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">api/</code>: External interface layer</li>
+  <li><code class="language-plaintext highlighter-rouge">vectordb/</code>: Vector database implementations</li>
+  <li><code class="language-plaintext highlighter-rouge">utils/</code>: Common utilities and helpers</li>
+</ul>
+
+<h2 id="key-design-features">Key Design Features</h2>
+
+<h3 id="1-modular-design">1. Modular Design</h3>
+<p>Each directory represents a distinct functional domain, ensuring clean separation of concerns and making the codebase easier to maintain and extend.</p>
+
+<h3 id="2-clear-hierarchy">2. Clear Hierarchy</h3>
+<p>The framework maintains a flat top-level structure with focused submodules, making it intuitive to navigate and understand the system’s organization.</p>
+
+<h3 id="3-extensibility">3. Extensibility</h3>
+<p>Every component includes base interfaces and abstract classes, facilitating easy extension and customization of functionality.</p>
+
+<h3 id="4-separation-of-concerns">4. Separation of Concerns</h3>
+<p>Clear boundaries between different system aspects ensure that components can evolve independently while maintaining system cohesion.</p>
+
+<h3 id="5-swarm-intelligence">5. Swarm Intelligence</h3>
+<p>A dedicated swarm module provides comprehensive support for multi-agent coordination and collaboration.</p>
+
+<h3 id="6-flexible-storage">6. Flexible Storage</h3>
+<p>Multiple storage backends accommodate different use cases and performance requirements.</p>
+
+<h3 id="7-tool-integration">7. Tool Integration</h3>
+<p>A robust framework for adding and managing external tool capabilities, enabling seamless integration with external systems and services.</p>
+
+<p>This organized structure ensures that developers can quickly locate components, understand their relationships, and extend the framework to meet specific needs while maintaining consistency and reliability.</p>
 
                 </div>
             </main>

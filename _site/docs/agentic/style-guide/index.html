@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction - Agentic Framework</title>
+    <title>Style Guide - Agentic Framework</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <style>
         :root {
@@ -346,7 +346,7 @@
                         <ul>
                             
                             <li>
-                                <a href="/docs/agentic/" class="active">
+                                <a href="/docs/agentic/" >
                                     Introduction
                                 </a>
                             </li>
@@ -375,7 +375,7 @@
                             </li>
                             
                             <li>
-                                <a href="/docs/agentic/style-guide/" >
+                                <a href="/docs/agentic/style-guide/" class="active">
                                     Style Guide
                                 </a>
                             </li>
@@ -394,103 +394,210 @@
 
             <main class="content">
                 <div class="content-header">
-                    <h1>Introduction</h1>
+                    <h1>Style Guide</h1>
                     
-                        <p class="description">Empowering People with AI Automation and Expertise</p>
+                        <p class="description">Coding standards and style guidelines</p>
                     
                 </div>
 
                 <div class="content-body">
-                    <h1 id="agentic-framework">Agentic Framework</h1>
+                    <h1 id="agentic-framework-style-guide">Agentic Framework Style Guide</h1>
 
-<p><strong>Empowering People with AI Automation and Expertise</strong></p>
+<h2 id="class-organization">Class Organization</h2>
 
-<p>Agentic is an advanced open-source framework that bridges the gap between cutting-edge AI technology and human potential. Our mission is to democratize AI automation by providing a robust platform where sophisticated agent systems meet intuitive user experiences.</p>
+<h3 id="1-class-structure">1. Class Structure</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ExampleClass</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="s">"""Clear class description"""</span>
 
-<h2 id="core-purpose">Core Purpose</h2>
+    <span class="c1"># -*- Core settings
+</span>    <span class="c1"># Clear field description
+</span>    <span class="n">field_name</span><span class="p">:</span> <span class="n">Type</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">"Description"</span><span class="p">)</span>
 
-<p>We empower individuals and organizations to:</p>
+    <span class="c1"># -*- Group settings
+</span>    <span class="c1"># Another field description
+</span>    <span class="n">another_field</span><span class="p">:</span> <span class="n">Type</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(...)</span>
 
+    <span class="c1"># -*- Pydantic settings
+</span>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(...)</span>
+</code></pre></div></div>
+
+<h3 id="2-field-organization">2. Field Organization</h3>
+
+<p>Fields should be organized in logical groups with clear markers:</p>
 <ul>
-  <li><strong>Automate Intelligently</strong>: Transform complex tasks into streamlined, AI-powered workflows</li>
-  <li><strong>Think &amp; Reason</strong>: Access advanced language models and reasoning engines for informed decision-making</li>
-  <li><strong>Learn &amp; Adapt</strong>: Leverage continuous learning through knowledge management and vector-based systems</li>
-  <li><strong>Collaborate</strong>: Harness multi-agent swarms that work together to solve complex problems</li>
-  <li><strong>Process &amp; Understand</strong>: Handle diverse information sources with intelligent document processing</li>
-  <li><strong>Create &amp; Innovate</strong>: Build customized AI solutions without deep technical expertise</li>
+  <li>Use <code class="language-plaintext highlighter-rouge"># -*-</code> to mark section headers</li>
+  <li>Group related fields together</li>
+  <li>Add descriptive comments for each field</li>
+  <li>Use consistent naming</li>
 </ul>
 
-<h2 id="platform-for-innovation">Platform for Innovation</h2>
+<p>Example groups:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- Core settings
+# Basic configuration
+</span>
+<span class="c1"># -*- User settings
+# User-related fields
+</span>
+<span class="c1"># -*- Session settings
+# Session management
+</span>
+<span class="c1"># -*- Memory settings
+# Memory configuration
+</span>
+<span class="c1"># -*- Knowledge settings
+# Knowledge base configuration
+</span>
+<span class="c1"># -*- Tool settings
+# Tool-related settings
+</span>
+<span class="c1"># -*- Response settings
+# Output configuration
+</span>
+<span class="c1"># -*- System settings
+# System-level configuration
+</span>
+<span class="c1"># -*- Pydantic settings
+# Model configuration
+</span></code></pre></div></div>
 
-<p>Agentic serves as a foundational platform for:</p>
+<h3 id="3-field-documentation">3. Field Documentation</h3>
 
+<p>Each field should have:</p>
 <ul>
-  <li><strong>Service Creation</strong>: Launch new AI-powered services and products rapidly</li>
-  <li><strong>Business Transformation</strong>: Build custom automation solutions for specific industry needs</li>
-  <li><strong>Innovation Labs</strong>: Prototype and experiment with new AI applications</li>
-  <li><strong>Enterprise Solutions</strong>: Scale from proof-of-concept to production-ready systems</li>
-  <li><strong>Integration Hub</strong>: Connect existing systems with next-generation AI capabilities</li>
-  <li><strong>Market Expansion</strong>: Enter new markets with AI-enhanced offerings</li>
+  <li>A clear, one-line description comment</li>
+  <li>Appropriate type hints</li>
+  <li>Pydantic Field with relevant parameters</li>
+  <li>Aliases when needed for backward compatibility</li>
 </ul>
 
-<h2 id="technical-foundation">Technical Foundation</h2>
+<p>Example:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Model to use for this agent
+</span><span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BaseLLM</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="bp">None</span><span class="p">,</span>
+    <span class="n">alias</span><span class="o">=</span><span class="s">"provider"</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">"The LLM provider to use"</span>
+<span class="p">)</span>
+</code></pre></div></div>
 
-<p>Our production-ready framework delivers:</p>
+<h3 id="4-method-organization">4. Method Organization</h3>
 
-<h3 id="1-modular-architecture">1. Modular Architecture</h3>
+<p>Methods should be grouped by functionality:</p>
 <ul>
-  <li>Scalable from single agents to complex swarms</li>
-  <li>Multiple LLM providers and storage solutions</li>
-  <li>Extensible tool integration system</li>
+  <li>Properties first</li>
+  <li>Core methods next</li>
+  <li>Helper methods last</li>
+  <li>Clear docstrings with parameters and return types</li>
 </ul>
 
-<h3 id="2-enterprise-features">2. Enterprise Features</h3>
+<p>Example:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="nb">property</span>
+<span class="k">def</span> <span class="nf">identifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="s">"""Get unique identifier for this instance"""</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">core_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
+    <span class="s">"""Core functionality with clear description
+    
+    Args:
+        param: Parameter description
+        
+    Returns:
+        Description of return value
+    """</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">_helper_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="s">"""Internal helper method"""</span>
+    <span class="k">pass</span>
+</code></pre></div></div>
+
+<h2 id="code-style">Code Style</h2>
+
+<h3 id="1-imports">1. Imports</h3>
+<p>Organize imports in groups:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Standard library
+</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c1"># Third-party
+</span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+
+<span class="c1"># Local
+</span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">BaseClass</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">helper</span>
+</code></pre></div></div>
+
+<h3 id="2-type-hints">2. Type Hints</h3>
 <ul>
-  <li>Built-in safety mechanisms</li>
-  <li>Transparent reasoning processes</li>
-  <li>Secure and private operations</li>
-  <li>Resource-efficient processing</li>
+  <li>Always use type hints</li>
+  <li>Use Optional[] for nullable fields</li>
+  <li>Use Union[] for multiple types</li>
+  <li>Import types from typing module</li>
 </ul>
 
-<h3 id="3-user-centric-design">3. User-Centric Design</h3>
+<h3 id="3-documentation">3. Documentation</h3>
 <ul>
-  <li>Intuitive interfaces for all skill levels</li>
-  <li>Adaptable to individual needs</li>
-  <li>Clear visibility into AI decision-making</li>
-  <li>Seamless integration capabilities</li>
+  <li>Clear module docstrings</li>
+  <li>Class docstrings with examples</li>
+  <li>Method docstrings with args/returns</li>
+  <li>Inline comments for complex logic</li>
 </ul>
 
-<h2 id="growth-platform">Growth Platform</h2>
-
-<p>Agentic enables:</p>
-
+<h3 id="4-error-handling">4. Error Handling</h3>
 <ul>
-  <li><strong>Service Providers</strong>: Build and deploy custom AI solutions for clients</li>
-  <li><strong>Startups</strong>: Rapidly prototype and launch AI-powered products</li>
-  <li><strong>Enterprises</strong>: Create internal tools and customer-facing services</li>
-  <li><strong>Developers</strong>: Extend and customize for specific use cases</li>
-  <li><strong>Partners</strong>: Integrate AI capabilities into existing platforms</li>
-  <li><strong>Consultants</strong>: Deliver AI transformation projects efficiently</li>
+  <li>Use custom exceptions</li>
+  <li>Provide clear error messages</li>
+  <li>Handle edge cases explicitly</li>
+  <li>Log errors appropriately</li>
 </ul>
 
-<h2 id="vision">Vision</h2>
+<h2 id="best-practices">Best Practices</h2>
 
-<p>We’re building a future where:</p>
+<ol>
+  <li><strong>Consistency</strong>: Follow these patterns across all classes</li>
+  <li><strong>Readability</strong>: Clear names and organization</li>
+  <li><strong>Documentation</strong>: Comprehensive but concise</li>
+  <li><strong>Type Safety</strong>: Strong typing throughout</li>
+  <li><strong>Error Handling</strong>: Robust and informative</li>
+</ol>
 
-<ul>
-  <li>AI amplifies human expertise rather than replacing it</li>
-  <li>Complex technology becomes accessible to everyone</li>
-  <li>Automation enhances creativity and innovation</li>
-  <li>Collaborative AI systems multiply human potential</li>
-  <li>New business models emerge through AI integration</li>
-  <li>Innovation accelerates through shared capabilities</li>
-</ul>
+<h2 id="example-implementation">Example Implementation</h2>
 
-<hr />
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""Module description"""</span>
 
-<p>Whether you’re an individual seeking to boost productivity, a developer creating next-generation applications, or an enterprise transforming operations, Agentic provides the building blocks for turning AI possibilities into practical realities.</p>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
 
-<p>Together, we’re creating a world where advanced AI technology serves as a force multiplier for human capability and achievement, while enabling continuous innovation and service creation across industries.</p>
+<span class="k">class</span> <span class="nc">ExampleComponent</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="s">"""Component description with example usage"""</span>
+
+    <span class="c1"># -*- Core settings
+</span>    <span class="c1"># Primary identifier for this component
+</span>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(...,</span> <span class="n">description</span><span class="o">=</span><span class="s">"Unique identifier"</span><span class="p">)</span>
+    <span class="c1"># Name of the component
+</span>    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="c1"># -*- Configuration settings
+</span>    <span class="c1"># Configuration dictionary
+</span>    <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s">"Component configuration"</span>
+    <span class="p">)</span>
+
+    <span class="c1"># -*- Pydantic settings
+</span>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span>
+        <span class="n">arbitrary_types_allowed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">populate_by_name</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">core_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""Core functionality description"""</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">_helper</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""Internal helper method"""</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
 
                 </div>
             </main>

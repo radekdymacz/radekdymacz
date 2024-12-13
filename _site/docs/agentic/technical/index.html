@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction - Agentic Framework</title>
+    <title>Technical Overview - Agentic Framework</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <style>
         :root {
@@ -346,7 +346,7 @@
                         <ul>
                             
                             <li>
-                                <a href="/docs/agentic/" class="active">
+                                <a href="/docs/agentic/" >
                                     Introduction
                                 </a>
                             </li>
@@ -369,7 +369,7 @@
                             </li>
                             
                             <li>
-                                <a href="/docs/agentic/technical/" >
+                                <a href="/docs/agentic/technical/" class="active">
                                     Technical Overview
                                 </a>
                             </li>
@@ -394,103 +394,195 @@
 
             <main class="content">
                 <div class="content-header">
-                    <h1>Introduction</h1>
+                    <h1>Technical Overview</h1>
                     
-                        <p class="description">Empowering People with AI Automation and Expertise</p>
+                        <p class="description">Comprehensive technical architecture and system design</p>
                     
                 </div>
 
                 <div class="content-body">
-                    <h1 id="agentic-framework">Agentic Framework</h1>
+                    <h1 id="technical-architecture-overview">Technical Architecture Overview</h1>
 
-<p><strong>Empowering People with AI Automation and Expertise</strong></p>
+<p>The Agentic Framework is built on a modular, extensible architecture designed for building sophisticated AI agent systems. Here’s a detailed breakdown of the core components:</p>
 
-<p>Agentic is an advanced open-source framework that bridges the gap between cutting-edge AI technology and human potential. Our mission is to democratize AI automation by providing a robust platform where sophisticated agent systems meet intuitive user experiences.</p>
+<h2 id="1-core-agent-layer-agent">1. Core Agent Layer (<code class="language-plaintext highlighter-rouge">agent/</code>)</h2>
 
-<h2 id="core-purpose">Core Purpose</h2>
-
-<p>We empower individuals and organizations to:</p>
-
+<p>The foundation of the framework, providing:</p>
 <ul>
-  <li><strong>Automate Intelligently</strong>: Transform complex tasks into streamlined, AI-powered workflows</li>
-  <li><strong>Think &amp; Reason</strong>: Access advanced language models and reasoning engines for informed decision-making</li>
-  <li><strong>Learn &amp; Adapt</strong>: Leverage continuous learning through knowledge management and vector-based systems</li>
-  <li><strong>Collaborate</strong>: Harness multi-agent swarms that work together to solve complex problems</li>
-  <li><strong>Process &amp; Understand</strong>: Handle diverse information sources with intelligent document processing</li>
-  <li><strong>Create &amp; Innovate</strong>: Build customized AI solutions without deep technical expertise</li>
+  <li>Fundamental agent implementations</li>
+  <li>Agent state management and persistence</li>
+  <li>Core interfaces for all agents</li>
+  <li>Base data structures and configurations via <code class="language-plaintext highlighter-rouge">model/</code></li>
 </ul>
 
-<h2 id="platform-for-innovation">Platform for Innovation</h2>
+<h2 id="2-intelligence-components">2. Intelligence Components</h2>
 
-<p>Agentic serves as a foundational platform for:</p>
+<p>The cognitive engine of the system:</p>
 
+<h3 id="language-models-llm">Language Models (<code class="language-plaintext highlighter-rouge">llm/</code>)</h3>
 <ul>
-  <li><strong>Service Creation</strong>: Launch new AI-powered services and products rapidly</li>
-  <li><strong>Business Transformation</strong>: Build custom automation solutions for specific industry needs</li>
-  <li><strong>Innovation Labs</strong>: Prototype and experiment with new AI applications</li>
-  <li><strong>Enterprise Solutions</strong>: Scale from proof-of-concept to production-ready systems</li>
-  <li><strong>Integration Hub</strong>: Connect existing systems with next-generation AI capabilities</li>
-  <li><strong>Market Expansion</strong>: Enter new markets with AI-enhanced offerings</li>
+  <li>Integration with OpenAI GPT models</li>
+  <li>Anthropic Claude integration</li>
+  <li>Extensible LLM provider interface</li>
 </ul>
 
-<h2 id="technical-foundation">Technical Foundation</h2>
-
-<p>Our production-ready framework delivers:</p>
-
-<h3 id="1-modular-architecture">1. Modular Architecture</h3>
+<h3 id="embedding-engine-embedder">Embedding Engine (<code class="language-plaintext highlighter-rouge">embedder/</code>)</h3>
 <ul>
-  <li>Scalable from single agents to complex swarms</li>
-  <li>Multiple LLM providers and storage solutions</li>
-  <li>Extensible tool integration system</li>
+  <li>Text vectorization capabilities</li>
+  <li>Semantic understanding</li>
+  <li>Vector representations for efficient processing</li>
 </ul>
 
-<h3 id="2-enterprise-features">2. Enterprise Features</h3>
+<h3 id="reasoning-engine-reasoning">Reasoning Engine (<code class="language-plaintext highlighter-rouge">reasoning/</code>)</h3>
 <ul>
-  <li>Built-in safety mechanisms</li>
-  <li>Transparent reasoning processes</li>
-  <li>Secure and private operations</li>
-  <li>Resource-efficient processing</li>
+  <li>Logic and inference systems</li>
+  <li>Decision-making frameworks</li>
+  <li>Pattern recognition capabilities</li>
 </ul>
 
-<h3 id="3-user-centric-design">3. User-Centric Design</h3>
+<h3 id="knowledge-management-knowledge">Knowledge Management (<code class="language-plaintext highlighter-rouge">knowledge/</code>)</h3>
 <ul>
-  <li>Intuitive interfaces for all skill levels</li>
-  <li>Adaptable to individual needs</li>
-  <li>Clear visibility into AI decision-making</li>
-  <li>Seamless integration capabilities</li>
+  <li>Information storage and retrieval</li>
+  <li>Knowledge base management</li>
+  <li>Data organization and access patterns</li>
 </ul>
 
-<h2 id="growth-platform">Growth Platform</h2>
+<h2 id="3-memory-systems-memory-and-storage">3. Memory Systems (<code class="language-plaintext highlighter-rouge">memory/</code> and <code class="language-plaintext highlighter-rouge">storage/</code>)</h2>
 
-<p>Agentic enables:</p>
-
+<p>Comprehensive memory management:</p>
 <ul>
-  <li><strong>Service Providers</strong>: Build and deploy custom AI solutions for clients</li>
-  <li><strong>Startups</strong>: Rapidly prototype and launch AI-powered products</li>
-  <li><strong>Enterprises</strong>: Create internal tools and customer-facing services</li>
-  <li><strong>Developers</strong>: Extend and customize for specific use cases</li>
-  <li><strong>Partners</strong>: Integrate AI capabilities into existing platforms</li>
-  <li><strong>Consultants</strong>: Deliver AI transformation projects efficiently</li>
+  <li>Conversation history tracking</li>
+  <li>Vector-based memory storage</li>
+  <li>Multiple storage backends:
+    <ul>
+      <li>Redis for fast access</li>
+      <li>Vector stores for semantic search</li>
+    </ul>
+  </li>
+  <li>State persistence mechanisms</li>
+  <li>Memory optimization and cleanup</li>
 </ul>
 
-<h2 id="vision">Vision</h2>
+<h2 id="4-document-processing-document">4. Document Processing (<code class="language-plaintext highlighter-rouge">document/</code>)</h2>
 
-<p>We’re building a future where:</p>
-
+<p>Advanced document handling:</p>
 <ul>
-  <li>AI amplifies human expertise rather than replacing it</li>
-  <li>Complex technology becomes accessible to everyone</li>
-  <li>Automation enhances creativity and innovation</li>
-  <li>Collaborative AI systems multiply human potential</li>
-  <li>New business models emerge through AI integration</li>
-  <li>Innovation accelerates through shared capabilities</li>
+  <li>Multi-format support (PDF, HTML)</li>
+  <li>Content extraction and parsing</li>
+  <li>Text processing and analysis</li>
+  <li>Document structure understanding</li>
 </ul>
 
-<hr />
+<h2 id="5-swarm-intelligence-swarm">5. Swarm Intelligence (<code class="language-plaintext highlighter-rouge">swarm/</code>)</h2>
 
-<p>Whether you’re an individual seeking to boost productivity, a developer creating next-generation applications, or an enterprise transforming operations, Agentic provides the building blocks for turning AI possibilities into practical realities.</p>
+<p>Sophisticated multi-agent coordination:</p>
 
-<p>Together, we’re creating a world where advanced AI technology serves as a force multiplier for human capability and achievement, while enabling continuous innovation and service creation across industries.</p>
+<h3 id="coordinator-coordinator">Coordinator (<code class="language-plaintext highlighter-rouge">coordinator/</code>)</h3>
+<ul>
+  <li>Task orchestration</li>
+  <li>Resource routing</li>
+  <li>System-wide coordination</li>
+</ul>
+
+<h3 id="hierarchy-management-hierarchy">Hierarchy Management (<code class="language-plaintext highlighter-rouge">hierarchy/</code>)</h3>
+<ul>
+  <li>Agent relationship structures</li>
+  <li>Role-based organization</li>
+  <li>Authority and permission systems</li>
+</ul>
+
+<h3 id="communication-system-messaging">Communication System (<code class="language-plaintext highlighter-rouge">messaging/</code>)</h3>
+<ul>
+  <li>Inter-agent messaging</li>
+  <li>Protocol management</li>
+  <li>Message routing and delivery</li>
+</ul>
+
+<h3 id="task-management-scheduler">Task Management (<code class="language-plaintext highlighter-rouge">scheduler/</code>)</h3>
+<ul>
+  <li>Workload distribution</li>
+  <li>Task prioritization</li>
+  <li>Execution monitoring</li>
+</ul>
+
+<h2 id="6-tool-and-workflow-systems">6. Tool and Workflow Systems</h2>
+
+<p>Extensible automation framework:</p>
+
+<h3 id="tool-framework-tools">Tool Framework (<code class="language-plaintext highlighter-rouge">tools/</code>)</h3>
+<ul>
+  <li>External tool integration</li>
+  <li>Tool discovery and registration</li>
+  <li>Execution management</li>
+</ul>
+
+<h3 id="workflow-engine-workflow">Workflow Engine (<code class="language-plaintext highlighter-rouge">workflow/</code>)</h3>
+<ul>
+  <li>Sequential processing</li>
+  <li>Concurrent execution</li>
+  <li>Graph-based workflows</li>
+  <li>State management</li>
+</ul>
+
+<h2 id="7-infrastructure-components">7. Infrastructure Components</h2>
+
+<p>Core system services:</p>
+
+<h3 id="api-layer-api">API Layer (<code class="language-plaintext highlighter-rouge">api/</code>)</h3>
+<ul>
+  <li>External interface definitions</li>
+  <li>Service endpoints</li>
+  <li>Integration points</li>
+</ul>
+
+<h3 id="vector-database-vectordb">Vector Database (<code class="language-plaintext highlighter-rouge">vectordb/</code>)</h3>
+<ul>
+  <li>Vector storage implementations</li>
+  <li>Similarity search</li>
+  <li>Efficient indexing</li>
+</ul>
+
+<h3 id="utilities-utils">Utilities (<code class="language-plaintext highlighter-rouge">utils/</code>)</h3>
+<ul>
+  <li>Common helper functions</li>
+  <li>Shared utilities</li>
+  <li>Support services</li>
+</ul>
+
+<h2 id="architectural-strengths">Architectural Strengths</h2>
+
+<ol>
+  <li><strong>Modularity</strong>
+    <ul>
+      <li>Self-contained components</li>
+      <li>Clear responsibility boundaries</li>
+      <li>Minimal cross-component dependencies</li>
+    </ul>
+  </li>
+  <li><strong>Extensibility</strong>
+    <ul>
+      <li>Base interfaces throughout</li>
+      <li>Plugin architecture</li>
+      <li>Easy addition of new implementations</li>
+    </ul>
+  </li>
+  <li><strong>Flexibility</strong>
+    <ul>
+      <li>Multiple storage options</li>
+      <li>Configurable components</li>
+      <li>Adaptable processing pipelines</li>
+    </ul>
+  </li>
+  <li><strong>Scalability</strong>
+    <ul>
+      <li>Single-agent to multi-agent support</li>
+      <li>Horizontal scaling capabilities</li>
+      <li>Resource optimization</li>
+    </ul>
+  </li>
+</ol>
+
+<p>This architecture provides a robust foundation for building complex AI agent systems, from simple automation tools to sophisticated multi-agent applications. The modular design ensures maintainability while the extensible nature allows for continuous evolution and enhancement of capabilities.</p>
 
                 </div>
             </main>

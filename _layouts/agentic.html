@@ -7,434 +7,232 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <style>
         :root {
-            --bg-primary: #121212;
-            --bg-secondary: #1e1e1e;
-            --text-primary: #ffffff;
-            --text-secondary: #b3b3b3;
+            --background: #ffffff;
+            --text: #1a1a1a;
+            --border: #e5e7eb;
+            --sidebar-bg: #f9fafb;
+            --link-color: #2563eb;
+            --code-bg: #f8fafc;
+            --heading-color: #111827;
+            --text-secondary: #4b5563;
             --gradient-start: #60a5fa;
             --gradient-middle: #8b5cf6;
             --gradient-end: #ec4899;
-            --border: rgba(255, 255, 255, 0.1);
-            --code-bg: #282828;
+            --accent-light: rgba(96, 165, 250, 0.1);
         }
 
         body {
-            background: var(--bg-primary);
-            color: var(--text-primary);
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
             line-height: 1.6;
-            font-size: 16px;
-            min-height: 100vh;
         }
 
         .docs-container {
             display: flex;
             min-height: 100vh;
             position: relative;
-            background: transparent;
+            background: var(--background);
+            justify-content: center;
+        }
+
+        .content-wrapper {
+            display: flex;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
         }
 
         .sidebar {
-            width: 280px;
-            padding: 2rem;
-            background: linear-gradient(180deg, 
-                rgba(30, 30, 30, 0.4) 0%, 
-                rgba(25, 25, 25, 0.4) 100%);
+            background: var(--sidebar-bg);
             border-right: 1px solid var(--border);
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            overflow-y: auto;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            padding: 2rem 1.5rem;
+            width: 280px;
+        }
+
+        .sidebar h2 {
+            font-weight: 600;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding-left: 0.5rem;
+            color: var(--heading-color);
+        }
+
+        .sidebar .menu-category {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin: 1.5rem 0 0.75rem;
+            padding-left: 0.5rem;
+        }
+
+        .sidebar a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            margin: 0.25rem 0;
+            font-size: 0.9375rem;
+        }
+
+        .sidebar a.active {
+            color: #fff;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background: var(--accent-light);
+            color: var(--link-color);
         }
 
         .content {
             flex: 1;
             padding: 2rem 3rem;
             max-width: 800px;
-            margin: 0 auto;
-            background: transparent;
+            font-size: 15px;
+            background: var(--background);
+        }
+
+        .content h1 {
+            font-size: 2.75rem;
+            letter-spacing: -0.025em;
+            font-weight: 700;
+            margin: 2rem 0 1.5rem;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .content h2 {
+            font-size: 1.875rem;
+            margin: 2.5rem 0 1rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            letter-spacing: -0.015em;
+        }
+
+        .content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 0.875rem;
+            font-weight: 600;
+            color: var(--heading-color);
+        }
+
+        .content ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .content ul li {
             position: relative;
-            min-height: 100vh;
+            margin: 0.75rem 0;
+            padding-left: 1.5rem;
         }
 
-        /* Override default theme styles */
-        .content code, 
-        .content pre,
-        .highlight code,
-        .highlight pre,
-        code, pre {
-            font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
-            color: #e0e0e0 !important;  /* Light text color */
+        .content ul li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
         }
 
-        /* Remove box shadows and borders from various elements */
-        pre, code, blockquote, table {
-            border: none !important;
-            box-shadow: none !important;
-        }
-
-        /* Make code blocks blend with the background */
         pre {
-            background: var(--code-bg) !important;
+            background: var(--code-bg);
             padding: 1.25rem;
             border-radius: 8px;
-            border: 1px solid rgba(96, 165, 250, 0.1);
+            border: 1px solid var(--border);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         code {
-            background: var(--code-bg) !important;
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-        }
-
-        /* Tables with subtle backgrounds */
-        table {
-            background: rgba(30, 30, 30, 0.3);
-            border-collapse: collapse;
-            width: 100%;
-            margin: 1rem 0;
-        }
-
-        th, td {
-            border: none;
-            border-bottom: 1px solid var(--border);
-            padding: 0.75rem;
-        }
-
-        th {
-            background: rgba(40, 40, 40, 0.3);
-            font-weight: 600;
-        }
-
-        /* Blockquotes with subtle styling */
-        blockquote {
-            background: rgba(30, 30, 30, 0.95);
-            border-left: 3px solid var(--gradient-middle);
-            margin: 1.5rem 0;
-            padding: 1.25rem 1.5rem;
-            border-radius: 0 8px 8px 0;
-            box-shadow: 
-                0 2px 4px rgba(0, 0, 0, 0.1),
-                0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        blockquote::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg,
-                var(--gradient-start) 0%,
-                transparent 100%);
-            opacity: 0.2;
-        }
-
-        /* Navigation links */
-        .sidebar a {
-            color: var(--text-primary);
-            opacity: 0.85;
-            text-decoration: none;
-            display: block;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            background: transparent;
-            position: relative;
-            border: 1px solid transparent;
-        }
-
-        .sidebar a:hover {
-            background: rgba(96, 165, 250, 0.1);
-            color: var(--text-primary);
-            opacity: 1;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
-        }
-
-        .sidebar a.active {
-            background: linear-gradient(135deg, 
-                rgba(96, 165, 250, 0.15) 0%, 
-                rgba(139, 92, 246, 0.15) 50%, 
-                rgba(236, 72, 153, 0.15) 100%);
-            color: #fff;
-            opacity: 1;
-            font-weight: 500;
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            box-shadow: 
-                0 2px 4px rgba(96, 165, 250, 0.1),
-                0 4px 8px rgba(139, 92, 246, 0.1),
-                0 -1px 1px rgba(236, 72, 153, 0.05) inset,
-                0 1px 1px rgba(255, 255, 255, 0.1) inset;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
-        .sidebar a.active:hover {
-            transform: translateY(-1px);
-            box-shadow: 
-                0 4px 12px rgba(96, 165, 250, 0.2),
-                0 6px 16px rgba(139, 92, 246, 0.2),
-                0 -1px 1px rgba(236, 72, 153, 0.05) inset,
-                0 1px 1px rgba(255, 255, 255, 0.1) inset;
-        }
-
-        /* Content links with 3D effect */
-        .content a:not(.anchor) {
-            color: var(--gradient-start);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-            background: linear-gradient(135deg, 
-                rgba(96, 165, 250, 0.1) 0%, 
-                rgba(139, 92, 246, 0.1) 50%, 
-                rgba(236, 72, 153, 0.1) 100%);
-            transition: all 0.2s ease;
-            position: relative;
-            display: inline-block;
-        }
-
-        .content a:not(.anchor):hover {
-            color: #fff;
-            background: linear-gradient(135deg, 
-                rgba(96, 165, 250, 0.9) 0%, 
-                rgba(139, 92, 246, 0.9) 50%, 
-                rgba(236, 72, 153, 0.9) 100%);
-            transform: translateY(-1px);
-            box-shadow: 
-                0 4px 12px rgba(96, 165, 250, 0.3),
-                0 6px 16px rgba(139, 92, 246, 0.3);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Headings */
-        h1, h2 {
-            font-family: 'Unbounded', sans-serif;
-            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.02em;
-        }
-
-        h1 { font-size: 2.5rem; }
-        h2 { font-size: 2rem; }
-
-        /* Content Styles */
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--text-primary);
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        p, li, ul, ol {
-            color: var(--text-primary);
-            opacity: 1;
-            margin: 1rem 0;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', monospace;
+            font-size: 0.875rem;
             line-height: 1.7;
         }
 
-        a {
-            color: var(--gradient-start);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
+        p {
+            margin: 1.25rem 0;
+            line-height: 1.75;
+            color: var(--text-secondary);
         }
 
-        a:hover {
-            color: var(--gradient-end);
-            text-decoration: underline;
-        }
-
-        /* Code highlighting improvements */
-        .highlight {
-            background: var(--code-bg);
+        .content section {
+            background: var(--background);
+            border: 1px solid var(--border);
             border-radius: 8px;
-            margin: 1rem 0;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
-        .highlight pre {
-            margin: 0;
-            padding: 1rem;
-        }
-
-        /* Language keywords */
-        .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt {
-            color: #c678dd;  /* Purple */
-        }
-
-        /* Strings */
-        .highlight .s, .highlight .s1, .highlight .s2 {
-            color: #98c379;  /* Green */
-        }
-
-        /* Numbers */
-        .highlight .m, .highlight .mi, .highlight .mf {
-            color: #d19a66;  /* Orange */
-        }
-
-        /* Functions */
-        .highlight .nf, .highlight .nb {
-            color: #61afef;  /* Blue */
-        }
-
-        /* Classes */
-        .highlight .nc {
-            color: #e5c07b;  /* Light Yellow */
-        }
-
-        /* Comments */
-        .highlight .c, .highlight .c1, .highlight .cm {
-            color: #7f848e;  /* Gray */
-            font-style: italic;
-        }
-
-        /* Variables */
-        .highlight .n {
-            color: var(--text-primary);  /* Bright white */
-        }
-
-        /* Operators */
-        .highlight .o {
-            color: #56b6c2;  /* Cyan */
-        }
-
-        /* Function parameters */
-        .highlight .p {
-            color: #abb2bf;  /* Light gray */
-        }
-
-        /* Import/from keywords */
-        .highlight .kn {
-            color: #c678dd;  /* Purple */
-        }
-
-        /* Built-in functions */
-        .highlight .nb {
-            color: #61afef;  /* Blue */
-        }
-
-        /* String interpolation */
-        .highlight .si {
-            color: #56b6c2;  /* Cyan */
-        }
-
-        /* Decorator @ symbol */
-        .highlight .nd {
-            color: #e5c07b;  /* Light Yellow */
-        }
-
-        /* Class names in decorators */
-        .highlight .na {
-            color: #61afef;  /* Blue */
-        }
-
-        /* Boolean values */
-        .highlight .kc {
-            color: #d19a66;  /* Orange */
-        }
-
-        /* Self keyword */
-        .highlight .bp {
-            color: #e06c75;  /* Red */
-        }
-
-        /* Module names in imports */
-        .highlight .nn {
-            color: var(--text-primary);  /* Bright white for module names */
-        }
-
-        /* Import statement */
-        .highlight .kn, .highlight .k, .highlight .kc {
-            color: #c678dd;  /* Bright purple for 'import', 'from' keywords */
-        }
-
-        /* Class/object being imported */
-        .highlight .n {
-            color: #e5c07b;  /* Bright yellow for imported names */
-        }
-
-        /* Fix for module attributes */
-        .highlight .na {
-            color: var(--text-primary);  /* Bright white for module attributes */
-        }
-
-        /* Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-        }
-
-        th, td {
-            padding: 0.75rem;
-        }
-
-        th {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        td {
-            color: var(--text-primary);
-            opacity: 1;
-        }
-
-        /* Lists */
-        ul, ol {
-            padding-left: 1.5rem;
-            opacity: 1;
-        }
-
-        li {
-            margin: 0.75rem 0;
-            opacity: 1;
-        }
-
-        /* Horizontal Rule */
-        hr {
-            border: none;
-            border-top: 1px solid var(--border);
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
             margin: 2rem 0;
         }
 
-        /* Images */
-        img {
-            max-width: 100%;
-            height: auto;
+        .feature-item {
+            background: var(--background);
+            border: 1px solid var(--border);
             border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.2s ease;
         }
 
-        /* Feature list specific styles */
-        .content ul li strong {
-            color: var(--text-primary);
-            opacity: 1;
-            font-weight: 600;
+        .feature-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
-        /* Ensure strong and emphasis are fully visible */
-        strong, em {
-            color: var(--text-primary);
-            opacity: 1;
+        blockquote {
+            border-left: 4px solid var(--gradient-start);
+            margin: 2rem 0;
+            padding: 1rem 1.5rem;
+            background: var(--accent-light);
+            border-radius: 0 8px 8px 0;
         }
 
-        /* Button/link styling */
+        blockquote p {
+            margin: 0;
+            color: var(--heading-color);
+            font-style: italic;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
         .content a:not(.anchor) {
-            color: var(--gradient-start);
+            color: var(--link-color);
             text-decoration: none;
             font-weight: 500;
             padding: 0.2em 0.4em;
             border-radius: 4px;
-            background: linear-gradient(135deg, 
-                rgba(96, 165, 250, 0.1) 0%, 
-                rgba(139, 92, 246, 0.1) 50%, 
-                rgba(236, 72, 153, 0.1) 100%);
             transition: all 0.2s ease;
             position: relative;
             display: inline-block;
@@ -442,50 +240,136 @@
 
         .content a:not(.anchor):hover {
             color: #fff;
-            background: linear-gradient(135deg, 
-                rgba(96, 165, 250, 0.9) 0%, 
-                rgba(139, 92, 246, 0.9) 50%, 
-                rgba(236, 72, 153, 0.9) 100%);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
             transform: translateY(-1px);
-            box-shadow: 
-                0 4px 12px rgba(96, 165, 250, 0.3),
-                0 6px 16px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3), 0 6px 16px rgba(139, 92, 246, 0.3);
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Table of Contents */
+        .page-toc {
+            position: sticky;
+            top: 2rem;
+            padding-left: 2rem;
+            font-size: 14px;
+            width: 220px;
+        }
+
+        .page-toc h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .page-toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .page-toc li {
+            margin: 0.5rem 0;
+        }
+
+        .page-toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .page-toc a:hover {
+            opacity: 1;
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        /* GitHub corner styles */
+        .github-corner {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .github-corner svg {
+            fill: var(--heading-color);
+            color: var(--background);
+            width: 64px;
+            height: 64px;
+        }
+
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out;
+        }
+
+        @keyframes octocat-wave {
+            0%, 100% { transform: rotate(0) }
+            20%, 60% { transform: rotate(-25deg) }
+            40%, 80% { transform: rotate(10deg) }
+        }
+
+        @media (max-width: 500px) {
+            .github-corner:hover .octo-arm {
+                animation: none;
+            }
+            .github-corner .octo-arm {
+                animation: octocat-wave 560ms ease-in-out;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- GitHub Corner -->
+    <a href="https://github.com/radekdymacz/agentic" class="github-corner" aria-label="View source on GitHub">
+        <svg width="80" height="80" viewBox="0 0 250 250" style="position: absolute; top: 0; right: 0" aria-hidden="true">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+            <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+        </svg>
+    </a>
+
     <div class="docs-container">
-        <nav class="sidebar">
-            <h2>Agentic Docs</h2>
-            
-            <h3>Documentation</h3>
-            <ul>
-                <li><a href="{{ '/docs/agentic/' | relative_url }}" {% if page.url == '/docs/agentic/' %}class="active"{% endif %}>Home</a></li>
-                <li><a href="{{ '/docs/agentic/overview' | relative_url }}" {% if page.url == '/docs/agentic/overview' %}class="active"{% endif %}>Architecture</a></li>
-                <li><a href="{{ '/docs/agentic/setup' | relative_url }}" {% if page.url == '/docs/agentic/setup' %}class="active"{% endif %}>Setup Guide</a></li>
-                <li><a href="{{ '/docs/agentic/development' | relative_url }}" {% if page.url == '/docs/agentic/development' %}class="active"{% endif %}>Development</a></li>
-            </ul>
-
-            {% assign api_docs = site.pages | where_exp: "item", "item.url contains '/docs/agentic/api'" %}
-            {% if api_docs.size > 0 %}
-            <h3>API Reference</h3>
-            <ul>
-                {% for doc in api_docs %}
-                <li><a href="{{ doc.url | relative_url }}" {% if page.url == doc.url %}class="active"{% endif %}>{{ doc.title }}</a></li>
+        <div class="content-wrapper">
+            <nav class="sidebar">
+                <h2>Agentic Docs</h2>
+                
+                {% assign category_order = "Getting Started,Documentation,API Reference,Contributing" | split: "," %}
+                
+                {% for category in category_order %}
+                    {% assign pages = site.pages | where: "layout", "agentic" | where: "category", category %}
+                    {% if pages.size > 0 %}
+                    <div class="menu-category">
+                        <h3>{{ category }}</h3>
+                        {% assign sorted_pages = pages | sort: "nav_order" %}
+                        <ul>
+                            {% for p in sorted_pages %}
+                            <li>
+                                <a href="{{ p.url | relative_url }}" {% if page.url == p.url %}class="active"{% endif %}>
+                                    {{ p.title }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
                 {% endfor %}
-            </ul>
-            {% endif %}
+            </nav>
 
-            <h3>Links</h3>
-            <ul>
-                <li><a href="https://github.com/radekdymacz/agentic" target="_blank">GitHub</a></li>
-            </ul>
-        </nav>
-        
-        <main class="content">
-            {{ content }}
-        </main>
+            <main class="content">
+                <div class="content-header">
+                    <h1>{{ page.title }}</h1>
+                    {% if page.description %}
+                        <p class="description">{{ page.description }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="content-body">
+                    {{ content }}
+                </div>
+            </main>
+        </div>
     </div>
 </body>
 </html>
